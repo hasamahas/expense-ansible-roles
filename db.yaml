@@ -1,0 +1,4 @@
+- name: Congifure DB server
+  hosts: db
+  become: yes
+  
