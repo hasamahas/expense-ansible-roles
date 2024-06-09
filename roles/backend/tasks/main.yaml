@@ -16,21 +16,27 @@
   ansible.builtin.user:
     name: expense
 
-- name: create app directory
-  ansible.builtin.file:
-    path: /app
-    state: directory
+- name: run app pre-requisites      # this code replacing below commented code
+  ansible.builtin.import_role:
+    name: common
+    tasks_from: app-pre-req
+    
 
-- name: download the file
-  ansible.builtin.get_url:
-    url: https://expense-builds.s3.us-east-1.amazonaws.com/expense-backend-v2.zip
-    dest: /tmp/backend.zip
+# - name: create app directory
+#   ansible.builtin.file:
+#     path: /app
+#     state: directory
 
-- name: unzip backend code
-  ansible.builtin.unarchive:
-    src:  /tmp/backend.zip    # by defaul check in ansible servers
-    dest: /app
-    remote_src: yes  # so we are telling unzip the file in remore server not in ansible server
+# - name: download the file
+#   ansible.builtin.get_url:
+#     url: https://expense-builds.s3.us-east-1.amazonaws.com/expense-backend-v2.zip
+#     dest: /tmp/backend.zip
+
+# - name: unzip backend code
+#   ansible.builtin.unarchive:
+#     src:  /tmp/backend.zip    # by defaul check in ansible servers
+#     dest: /app
+#     remote_src: yes  # so we are telling unzip the file in remore server not in ansible server
 
 - name: install dependancies
   ansible.builtin.command: npm install
