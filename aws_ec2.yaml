@@ -1,0 +1,3 @@
+plugin: amazon.asw.asw_ec2
+regions:
+- us-east-1
